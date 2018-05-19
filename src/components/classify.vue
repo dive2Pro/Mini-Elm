@@ -19,7 +19,7 @@
 </template>
 
 <script>
-const baseUrl = 'https://fuss10.elemecdn.com';
+import {after, groupAry , ImageBaseURL} from './utils'
 
 const config = {
   name: '商品分类',
@@ -43,10 +43,9 @@ const config = {
   methods: {
     appendBaseUrl(data) {
       const self = this;
-
       return data.map(({ image_url, ...rest }) => ({
         ...rest,
-        image_url: baseUrl + image_url,
+        image_url: ImageBaseURL + image_url,
       }));
     },
   },
@@ -59,31 +58,6 @@ const config = {
   },
 };
 
-function after(fn) {
-  return function(...args) {
-    const result = fn.apply(this, args);
-    return result;
-  };
-}
-
-function groupAry(ary, count) {
-  if (count == 0 || count >= ary.length) {
-    return ary;
-  }
-  const length = ary.length;
-  const newAry = [];
-  let index = 0;
-  while (index < length) {
-    newAry.push(ary.slice(index, index + count));
-    index += count;
-  }
-
-  if (index < length) {
-    newAry.push(ary.slice(index));
-  }
-
-  return newAry;
-}
 
 config.methods.appendBaseUrl = after(config.methods.appendBaseUrl);
 export default config;
