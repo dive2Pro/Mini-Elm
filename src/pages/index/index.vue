@@ -1,0 +1,119 @@
+<template>
+  <div class="container" @click="clickHandle('test click', $event)">
+    <div class="bigger">
+      <advertisting
+      imageStyle="height: 220rpx"
+      directionUrl="/pages/counter/main"  imageSrc="http://hptrust.org/wp-content/uploads/HPT-logo-blue-on-transparent-80x80.png" />
+    </div>
+    <classify />
+    <div class="oritation fullwidth">
+      <div class="simple">
+        <h1>品质套餐</h1>
+        <h3>搭配齐全吃得好</h3>
+        <h5>立即抢购 > </h5>
+        <advertisting imageSrc="https://fuss10.elemecdn.com/d/d4/16ff085900d62b8d60fa7e9c6b65dpng.png?imageMogr/format/webp/thumbnail/!240x160r/gravity/Center/crop/240x160/" />
+      </div>
+      <div class="simple">
+        <h1>限量抢购</h1>
+        <h3>超值美味9.9元起</h3>
+        <h5> 3726人正在抢 > </h5>
+      <advertisting imageSrc="https://fuss10.elemecdn.com/d/d4/16ff085900d62b8d60fa7e9c6b65dpng.png?imageMogr/format/webp/thumbnail/!240x160r/gravity/Center/crop/240x160/" />
+      </div>
+      </div>
+    
+  </div>
+</template>
+
+<script>
+import card from '@/components/card';
+import advertisting from '@/components/advertisting';
+import classify from '@/components/classify';
+
+export default {
+  data() {
+    return {
+      motto: 'Hello World',
+      userInfo: {},
+    };
+  },
+
+  components: {
+    card,
+    advertisting,
+    classify
+  },
+
+  methods: {
+    bindViewTap() {
+      const url = '../logs/main';
+      wx.navigateTo({ url });
+    },
+    getUserInfo() {
+      // 调用登录接口
+      wx.login({
+        success: () => {
+          wx.getUserInfo({
+            success: res => {
+              this.userInfo = res.userInfo;
+            },
+          });
+        },
+      });
+    },
+    clickHandle(msg, ev) {
+      console.log('clickHandle:', msg, ev);
+    },
+  },
+
+  created() {
+    // 调用应用实例的方法获取全局数据
+    this.getUserInfo();
+  },
+};
+</script>
+<style lang="scss">
+.oritation {
+  display: flex;
+  & > * {
+    flex: 1;
+  }
+}
+
+.simple {
+  position: relative;
+  height: 30rpx;
+  width: 50%;
+  & img {
+    top: 12vw;
+    right: 2.3333vw;
+    width: 3.76rem;
+    width: 37.6vw;
+    height: 2.506667rem;
+    height: 25.06667vw;
+    position: absolute;
+  }
+}
+.fullwidth{
+  width: 100vw;
+}
+.bigger{
+  & img {
+    height: 220rpx;
+  }
+}
+h1{
+  font-size: 20px;
+}
+h2 {
+  font-size: 18px;
+}
+h3 {
+  font-size: 16px;
+}
+h4 {
+  font-size: 14px;
+}
+h5 {
+  font-size: 12px;
+}
+</style>
