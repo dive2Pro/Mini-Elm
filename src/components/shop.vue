@@ -6,7 +6,7 @@
         scrolltolower ="lower"
         >
         <block v-for="s in shop" :key="s.id"  >
-            <a href="" :style="{height: '150rpx'}" >
+            <a @click="onItemClick(s)" :style="{height: '150rpx'}" >
                 <img  :src="s.image_path"/>
             </a>
         </block>
@@ -24,6 +24,10 @@ export default {
     initalShop: {
       type: Array,
       default: []
+    },
+    onItemClick: {
+      type: Function,
+      default: () => {}
     }
   },
   data: function() {

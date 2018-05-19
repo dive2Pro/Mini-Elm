@@ -20,7 +20,7 @@
         <advertisting imageSrc="https://fuss10.elemecdn.com/d/d4/16ff085900d62b8d60fa7e9c6b65dpng.png?imageMogr/format/webp/thumbnail/!240x160r/gravity/Center/crop/240x160/" />
       </div>
     </div>
-    <shop :initalShop="shops" />
+    <shop :initalShop="shops" :onItemClick="onShopClick"/>
   </div>
 </template>
 
@@ -59,6 +59,9 @@ export default {
       const url = '../logs/main';
       wx.navigateTo({ url });
     },
+    onShopClick(item) {
+      wx.navigateTo({ url: `../shop/main?id=${item.id}`})
+    },
     getUserInfo() {
       // 调用登录接口
       wx.login({
@@ -72,7 +75,6 @@ export default {
       });
     },
     clickHandle(msg, ev) {
-      console.log('clickHandle:', msg, ev);
     },
     async requestMore() {
       this.isLoading = true;
