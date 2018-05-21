@@ -40,7 +40,6 @@ export default {
   },
   watch: {
     mapShop() {
-      console.log(this.shop)
     }
   },
   computed: {
@@ -53,7 +52,7 @@ export default {
       const self = this;
       return data.map(({ image_path, ...rest }) => ({
         ...rest,
-        image_path: '//elm.cangdu.org/img' + '/' + image_path,
+        image_path: self.IMAGE_PREFIX + image_path,
       }));
     },
     async lower() {
@@ -74,4 +73,5 @@ img{
 .s-view{
   background: lightcoral;
 }
+
 </style>

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Fly from 'flyio/dist/npm/wx';
 import App from './App';
+import ShopCart from './ShopCart';
 
 Vue.config.productionTip = false;
 App.mpType = 'app';
@@ -11,15 +12,16 @@ app.$mount();
 function FlyPlugin() {}
 
 FlyPlugin.install = function install(vue) {
-  const innerVue = vue;
+  const $vue = vue;
   const fly = new Fly();
   // console.log(fly.config.baseURL);
   fly.config.baseURL = 'http://cangdu.org:8001/';
-  innerVue.prototype.$fly = fly;
+  $vue.prototype.$fly = fly;
+  $vue.prototype.IMAGE_PREFIX = '//elm.cangdu.org/img/';
 };
 
 Vue.use(FlyPlugin);
-
+Vue.use(ShopCart);
 export default {
   // 这个字段走 app.json
   config: {

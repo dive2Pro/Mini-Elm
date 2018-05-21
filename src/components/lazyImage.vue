@@ -27,7 +27,6 @@ export default {
       // image.onload = function onload() {
       // TODO: min-delay
       self.imageSrc = self.src;
-      console.log('-------------', self.imageSrc);
 
       // };
       // image.src = self.src;

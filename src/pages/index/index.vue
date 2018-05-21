@@ -60,7 +60,7 @@ export default {
       wx.navigateTo({ url });
     },
     onShopClick(item) {
-      wx.navigateTo({ url: `../shop/main?id=${item.id}`})
+      wx.navigateTo({ url: `../shop/main?id=${item.id}&data=${JSON.stringify(item)}`})
     },
     getUserInfo() {
       // 调用登录接口
@@ -93,9 +93,6 @@ export default {
       await new Promise((resolve)=> {
         setTimeout(resolve, 2000)
       })
-
-      console.log(this.shops);
-      
       this.isLoading = false;
     },
   },
