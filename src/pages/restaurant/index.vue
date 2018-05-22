@@ -16,7 +16,7 @@
                   <h2> {{food.name}} </h2>
                   <h1 class="food-price"> {{food.spec.price}} </h1>
                   <div class="food-operator">
-                      <ShopcartOperator :food="food" :restaurant="{id: initialData.id}" :rId="initialData.id" />
+                      <ShopcartOperator :food="food" :restaurant="food.parent" :rId="initialData.id" />
                   </div>
               </div>
         </div>

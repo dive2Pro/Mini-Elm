@@ -26,7 +26,15 @@ export default {
     },
   },
   created() {
+      console.log('created- restaurant ', this.rId);
     this.$sc.initRestaurant(this.rId);
+  },
+  beforeMount() {
+  },
+  beforeUpdate() {
+  },
+  beforeDestroy() {
+      console.warn(' destroy')
   },
   computed: {
     totalCount() {

@@ -49,10 +49,10 @@ export default {
       },
       ids() {
           const { item_id } = this.food;
-          const { id } = this.restaurant
+          const { restaurant_id } = this.restaurant
           // console.log(item_id, id)
           return [
-            id
+            restaurant_id
             ,this.food
           ]
       }

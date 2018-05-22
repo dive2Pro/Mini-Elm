@@ -84,10 +84,12 @@ export default class ShopCart {
     const { db, Vue } = this;
     this.initRestaurant(rId);
     const { item_id } = food;
-    if (!!db[rId][item_id] === false) {
+    if (!!db[rId][item_id] === false && food.restaurant_id === rId) {
+      console.log('---- rID = ', rId);
       Vue.util.defineReactive(db[rId], item_id, food);
       Vue.set(db[rId][item_id], SHOPCART_COUNT, 0);
     }
+    // console.log(Object.keys(db[rId]));
   };
 
   add(...args) {
@@ -107,11 +109,14 @@ export default class ShopCart {
   }
 
   getCount(rId, food) {
+    this.initFood(rId, food);
     return this.db[rId][food.item_id][SHOPCART_COUNT];
   }
   getTotalCount = rId => {
+    this.initRestaurant(rId);
     const r = this.db[rId];
-    if(r[INNER_UPDATER]){
+    if (r[INNER_UPDATER]) {
+      //
     }
     const result = Object.keys(r).reduce((p, item_id) => {
       const food = r[item_id];
@@ -121,13 +126,21 @@ export default class ShopCart {
   };
 
   getTotalPrice(rId) {
+    this.initRestaurant(rId);
     const r = this.db[rId];
-    // /* eslint-disable */ if (this.db[rId][INNER_UPDATER]) {
-    // }
-    if (!r) {
-      return 0;
+    console.log(Object.keys(r).filter(k => r[k][SHOPCART_COUNT] > 0));
+    if (r[INNER_UPDATER]) {
+      //
     }
-    return Object.keys(r).reduce((p, food) => food[SHOPCART_COUNT] || 0 + p, 0);
+    return Object.keys(r).reduce((p, id) => {
+      const food = r[id];
+      const count = food[SHOPCART_COUNT];
+      const {
+        spec: { price },
+      } = food;
+      // console.log(count, food.spec.price);
+      return p + count * price;
+    }, 0);
   }
 }
 
