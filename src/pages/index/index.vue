@@ -60,7 +60,7 @@ export default {
       wx.navigateTo({ url });
     },
     onShopClick(item) {
-      wx.navigateTo({ url: `../shop/main?id=${item.id}&data=${JSON.stringify(item)}`})
+      wx.navigateTo({ url: `../restaurant/main?id=${item.id}&data=${JSON.stringify(item)}`})
     },
     getUserInfo() {
       // 调用登录接口

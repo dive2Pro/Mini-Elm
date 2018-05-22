@@ -87,5 +87,6 @@ img {
 }
 swiper {
   width: 100vw;
+  min-height: 150rpx;
 }
 </style>

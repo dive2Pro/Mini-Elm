@@ -7,8 +7,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { shopcart } from './index';
 export default {
   name: 'Shopcart-Operator',
   data() {
@@ -22,33 +20,41 @@ export default {
       type: Object,
       required: true,
     },
+    restaurant: {
+        type: Object,
+        required: true
+    }
   },
   mounted() {
-    //   setInterval(() => {
-    //     //   console.log(this.count)
-    //   }, 1000)
-    // console.log(this.$sc)
   },
-  created() {
-    const { item_id, restaurant_id } = this.food;
-    this.$sc.initFood(restaurant_id, item_id);
+  beforeCreate() {
+  },
+  created(){
+    this.$sc.initFood(...this.ids);
   },
   methods: {
     add(...args) {
-      const { item_id, restaurant_id } = this.food;
-      this.$sc.add(restaurant_id, item_id);
+      this.$sc.add(...this.ids);
     },
     minus(args) {
-      const { item_id, restaurant_id } = this.food;
-      this.$sc.minus(restaurant_id, item_id);
+      this.$sc.minus(...this.ids);
     },
-  },
-  watch() {
   },
   computed: {
       count() {
-          const { item_id, restaurant_id } = this.food;
-          return this.$sc.db[restaurant_id][item_id]
+          const ids = this.ids;
+          // const result =  this.$sc.db[ids[0]][ids[1]]
+          const result = this.$sc.getCount(...ids)
+          return result;
+      },
+      ids() {
+          const { item_id } = this.food;
+          const { id } = this.restaurant
+          // console.log(item_id, id)
+          return [
+            id
+            ,this.food
+          ]
       }
   }
 };
